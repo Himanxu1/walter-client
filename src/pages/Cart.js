@@ -12,6 +12,16 @@ const Cart = () => {
  
   const navigate = useNavigate()
   const userItem = useSelector((store)=>store.user.items)
+
+  const createOrder = (userid,productid) =>{
+
+   axios.post(`${backend_url}api/order/add`,{userid,productid}).then((res)=>{
+    console.log(res)
+   }).catch((err)=>{
+    console.log(err)
+   })
+
+  }
   function loadScript(src) {
     return new Promise((resolve) => {
         const script = document.createElement("script");
@@ -63,6 +73,8 @@ async function displayRazorpay() {
           const result = await axios.post(`${backend_url}api/payment/success`, data);
 
           alert(result.data.msg,"payment succcesful");
+          const productIds = cartItem.map((item) =>  item.productid)
+          createOrder(userItem.userid,productIds)
           dispatch(clearCart())
           navigate('/products')
           
@@ -86,9 +98,8 @@ async function displayRazorpay() {
 
 
   const cartItem = useSelector((store)=>store.cart.items)
+ 
   const dispatch = useDispatch()
-
-
 
   const handleRemove  = (id)=>{
     
@@ -107,6 +118,10 @@ async function displayRazorpay() {
   const total = cartItem.reduce((acc,curr)=>{
     return acc+Number(curr.price)*curr.quantity
   },0)
+  
+    
+   
+
   return  (
     <div className='bg-black w-full h-auto pb-[100px]' >
          <ToastContainer

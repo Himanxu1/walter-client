@@ -25,7 +25,11 @@ const ProductDescription = () => {
 
 
   const fetchProductById = async (id)=>{
-     const res = await fetch(`${backend_url}api/products?id=${id}`)
+     const res = await fetch(`${backend_url}api/products?id=${id}`,{ 
+      headers:{
+      Authorization:localStorage.getItem('token')
+    }
+  })
      const data = await res.json()
     
      setSingleProduct(data?.product)

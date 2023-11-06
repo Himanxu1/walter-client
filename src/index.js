@@ -12,6 +12,8 @@ import Checkout from './pages/Checkout';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 
+
+
 const appRouter = createBrowserRouter([
   {
     path:'/',

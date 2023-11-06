@@ -11,6 +11,7 @@ const ProductCard = (singleProduct) => {
     const dispatch = useDispatch()
   
     const handlewishDelete =(id)=>{
+      dispatch(removeFromWish(id))
       toast('🦄 removed from wishlist!', {
         position: "top-center",
         autoClose: 1000,
@@ -21,7 +22,7 @@ const ProductCard = (singleProduct) => {
         progress: undefined,
         theme: "dark",
         });
-      dispatch(removeFromWish(id))
+   
     }
   return (
 

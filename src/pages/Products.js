@@ -35,7 +35,7 @@ export const Products = () => {
       </div>
         <h1 className='text-center text-[100px] font-bold text-white'>/all-Products</h1>
          <div className='flex flex-wrap justify-center mt-20'>
-      { filteredProducts.length === 0 ? <div className='text-center font-mono text-3xl text-white'>loading👀...</div>: filteredProducts.map((singleProduct,index)=>{
+      { filteredProducts.length === 0 ? <div className='text-center font-mono text-3xl text-white'>No Product found...</div>: filteredProducts.map((singleProduct,index)=>{
             return (
               <>
                <ProductCard key={singleProduct.id} singleProduct={singleProduct} wish={false} />

@@ -6,7 +6,7 @@ const Wishlist = () => {
 
     const wishItems = useSelector((store)=>store.wish.items)
    
-
+console.log(wishItems)
   return (
     <div className='bg-black w-full'>
         
