@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router-dom'
 import {AiOutlineHeart,AiFillHeart} from 'react-icons/ai'
 import { addToWish } from '../utils/wishlistSlice'
+import showToast from '../utils/toast/showToast'
 
 const ProductDescription = () => {
 
@@ -27,7 +28,8 @@ const ProductDescription = () => {
   const fetchProductById = async (id)=>{
      const res = await fetch(`${backend_url}api/products?id=${id}`,{ 
       headers:{
-      Authorization:localStorage.getItem('token')
+        'Content-Type': 'application/json', 
+       Authorization:localStorage.getItem('token')
     }
   })
      const data = await res.json()
@@ -42,27 +44,9 @@ const ProductDescription = () => {
   const handleClick = (item)=>{
     
         if(cartItem.includes(item)){
-          toast.warn('🦄 already in cart!', {
-            position: "top-center",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
+        showToast('🦄 already in cart!')
         }else{
-          toast('🦄 added to cart!', {
-            position: "top-center",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
+         showToast('🦄 added to cart!')
           dispatch(addToCart(item))
         }
   }
@@ -90,27 +74,9 @@ const ProductDescription = () => {
   const handleWish = (item)=>{
     
     if(wishItem.includes(item)){
-      toast.warn('🦄 already in wishlist!', {
-        position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
+     showToast('🦄 already in wishlist!')
     }else{
-      toast.success('🦄 added to wishlist!', {
-        position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
+      showToast('🦄 added to wishlist!')
       dispatch(addToWish(item))
       setWished(true)
     }

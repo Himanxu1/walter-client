@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import axios  from 'axios'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import showToast from '../utils/toast/showToast';
 const backend_url = process.env.REACT_APP_BACKEND_URI;
 
 const Login = () => {
@@ -17,21 +18,14 @@ const Login = () => {
 
     const handleSignin = ()=>{
         axios.post(`${backend_url}api/auth/login`,{email,password}).then((res)=>{
-
-            toast('🦄 login Success!', {
-                position: "top-center",
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-                });
+            showToast('🦄 login Success!')
+           
             localStorage.setItem('token',res.data.token)    
-            navigate("/products")
+            navigate("/")
             dispatch(addUser(res.data))
          }).catch((err)=>{
+            alert('Unauthorized User!')
+            navigate("/signup")
             console.log(err)
          })
     }

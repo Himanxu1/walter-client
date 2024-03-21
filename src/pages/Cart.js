@@ -5,6 +5,7 @@ import { ToastContainer,toast } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import showToast from '../utils/toast/showToast';
 
 const backend_url = process.env.REACT_APP_BACKEND_URI;
 
@@ -103,16 +104,7 @@ async function displayRazorpay() {
 
   const handleRemove  = (id)=>{
     
-    toast('🦄 removed from cart!', {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      });
+  showToast('🦄 removed from cart!')
     dispatch(removeFromCart(id))
   }
   const total = cartItem.reduce((acc,curr)=>{

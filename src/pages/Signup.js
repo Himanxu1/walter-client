@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { ToastContainer,toast } from 'react-toastify'
-import "react-toastify/dist/ReactToastify.css";
+import axios from 'axios';
+import showToast from '../utils/toast/showToast';
 
 const backend_url = process.env.REACT_APP_BACKEND_URI;
 
@@ -16,17 +15,7 @@ const Signup = () => {
 
     const handleSignup =  () =>{
          axios.post(`${backend_url}api/auth/signup`,{username,email,password}).then((res)=>{
-            console.log(res.data)
-            toast('🦄 Sign Up success!', {
-                position: "top-center",
-                autoClose: 1000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-                });
+            showToast('🦄 Sign Up success!')
             navigate("/login")
          }).catch((err)=>{
             console.log(err)
